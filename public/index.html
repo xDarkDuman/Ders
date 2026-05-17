@@ -13,7 +13,7 @@
 
   <script>
     async function callAI(prompt) {
-      const response = await fetch("/api/ai", {
+      fetch("https://ders-67dt.onrender.com/api/ai", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
