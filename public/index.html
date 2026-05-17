@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Study Quest AI</title>
+</head>
+<body>
+  <h1>Study Quest AI Test</h1>
+
+  <button id="testBtn">AI Test Et</button>
+  <pre id="output">Burada sonuç görünecek.</pre>
+
+  <script>
+    async function callAI(prompt) {
+      const response = await fetch("/api/ai", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ prompt })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || data.error || "Bilinmeyen hata");
+      }
+
+      return data.text;
+    }
+
+    document.getElementById("testBtn").addEventListener("click", async () => {
+      const out = document.getElementById("output");
+      out.textContent = "Bekleniyor...";
+
+      try {
+        const text = await callAI("10. sınıf öğrencisine tork konusunu basit anlat.");
+        out.textContent = text;
+      } catch (err) {
+        out.textContent = "HATA:\n" + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
