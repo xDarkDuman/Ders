@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const AI_API_KEY = "sk-4902dfe35ef249af90c8c2728b3c6bf1";
 const AI_MODEL = "claude-opus-4-7";
